@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum UserRole {
+  PLAYER
+  ORGANIZER
+  ADMIN
+}
+
+enum TournamentFormat {
+  SOLO
+  TEAM
+}
+
+enum TournamentStatus {
+  DRAFT
+  OPEN
+  ONGOING
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+  WITHDRAWN
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  role      UserRole @default(PLAYER)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // has_members: un user peut appartenir à une équipe (optionnel)
+  teamId Int?
+  team   Team? @relation("TeamMembers", fields: [teamId], references: [id])
+
+  // organizes: un organizer/admin peut créer plusieurs tournois
+  organizedTournaments Tournament[] @relation("TournamentOrganizer")
+
+  // registers_as_player: inscriptions SOLO (un user peut avoir plusieurs inscriptions)
+  registrations Registration[] @relation("PlayerRegistrations")
+
+  // captains: si le user est capitaine d'une équipe (0 ou 1 équipe)
+  captainOf Team? @relation("TeamCaptain")
+}
+
+model Tournament {
+  id              Int              @id @default(autoincrement())
+  name            String
+  game            String
+  format          TournamentFormat
+  maxParticipants Int
+  prizePool       Float
+  startDate       DateTime
+  endDate         DateTime?
+  status          TournamentStatus @default(DRAFT)
+
+  organizerId Int
+  organizer   User @relation("TournamentOrganizer", fields: [organizerId], references: [id])
+
+  registrations Registration[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Team {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  tag       String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // captains: une équipe a 1 capitaine, un user ne capitaine qu'une équipe (on force via @unique)
+  captainId Int  @unique
+  captain   User @relation("TeamCaptain", fields: [captainId], references: [id])
+
+  // has_members: une équipe a plusieurs membres
+  members User[] @relation("TeamMembers")
+
+  // registers_as_team: inscriptions TEAM
+  registrations Registration[]
+}
+
+model Registration {
+  id           Int                @id @default(autoincrement())
+  tournamentId Int
+  status       RegistrationStatus @default(PENDING)
+  registeredAt DateTime           @default(now())
+  confirmedAt  DateTime?
+
+  tournament Tournament @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+
+  // SOLO: playerId renseigné, teamId null
+  playerId Int?
+  player   User? @relation("PlayerRegistrations", fields: [playerId], references: [id], onDelete: Cascade)
+
+  // TEAM: teamId renseigné, playerId null
+  teamId Int?
+  team   Team? @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  // Unicité: un joueur / une équipe ne peut s'inscrire qu'une fois au même tournoi
+  @@unique([tournamentId, playerId])
+  @@unique([tournamentId, teamId])
+}

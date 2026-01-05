@@ -1,0 +1,59 @@
+<%- include('../partials/head', { title: 'Accueil' }) %>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+<%- include('../partials/header') %>
+
+<main class="container mx-auto py-8 px-4 grow">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Bienvenue au E-sport Tournament Manager</h1>
+        <p class="text-xl text-gray-600">Gérez vos tournois, équipes et inscriptions</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- TOURNAMENTS -->
+        <a href="/tournaments" class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="text-center">
+                <div class="flex justify-center mb-4 text-blue-500">
+                    <%- icon('Trophy', { size: 64 }) %>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Tournois</h2>
+                <p class="text-gray-600 mb-4">Parcourez les tournois disponibles</p>
+                <span class="inline-block bg-blue-500 text-white px-4 py-2 rounded-full font-semibold">
+            <%= tournaments.length %> tournois
+          </span>
+            </div>
+        </a>
+
+        <!-- TEAMS -->
+        <a href="/teams" class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="text-center">
+                <div class="flex justify-center mb-4 text-green-500">
+                    <%- icon('Users', { size: 64 }) %>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Équipes</h2>
+                <p class="text-gray-600 mb-4">Découvrez les équipes enregistrées</p>
+                <span class="inline-block bg-green-500 text-white px-4 py-2 rounded-full font-semibold">
+            <%= teams.length %> équipes
+          </span>
+            </div>
+        </a>
+
+        <!-- REGISTRATIONS -->
+        <a href="/tournaments" class="bg-white rounded-lg shadow-lg p-8 hover:shadow-xl transition-shadow">
+            <div class="text-center">
+                <div class="flex justify-center mb-4 text-purple-500">
+                    <%- icon('ClipboardList', { size: 64 }) %>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">Inscriptions</h2>
+                <p class="text-gray-600 mb-4">Consultez les inscriptions par tournoi</p>
+                <span class="inline-block bg-purple-500 text-white px-4 py-2 rounded-full font-semibold">
+            Voir via les tournois
+          </span>
+            </div>
+        </a>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

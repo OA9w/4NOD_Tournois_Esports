@@ -1,0 +1,84 @@
+{
+  "name": "esport-tournament",
+  "version": "1.0.0",
+  "description": "REST API to manage games available at a LAN party",
+  "main": "src/server.js",
+  "type": "module",
+  "author": "William Fontaine",
+  "license": "MIT",
+  "keywords": [
+    "api",
+    "rest",
+    "express",
+    "games",
+    "esport-tournament",
+    "nodejs"
+  ],
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "scripts": {
+    "dev": "npm run css:build && node --experimental-strip-types --watch src/server.js",
+    "start": "npm run css:build && node --experimental-strip-types src/server.js",
+    "css:build": "npx @tailwindcss/cli -i ./src/public/css/input.css -o ./src/public/css/style.css --minify",
+    "css:watch": "npx @tailwindcss/cli -i ./src/public/css/input.css -o ./src/public/css/style.css --watch",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md}\"",
+    "prepare": "husky",
+    "db:migrate": "prisma migrate dev",
+    "db:generate": "prisma generate",
+    "db:studio": "prisma studio",
+    "db:seed": "node prisma/seed.js",
+    "db:reset": "prisma migrate reset --force"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.0.0",
+    "@prisma/client": "^7.0.0",
+    "@tailwindcss/cli": "^4.1.17",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.4.6",
+    "chalk": "^5.6.2",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-session": "^1.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "lucide-static": "^0.554.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "tailwindcss": "^4.1.17",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^25.0.3",
+    "@vitest/coverage-v8": "^4.0.14",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.6.2",
+    "prisma": "^7.2.0",
+    "supertest": "^7.1.4",
+    "vitest": "^4.0.14"
+  }
+}

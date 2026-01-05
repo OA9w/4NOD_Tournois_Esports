@@ -1,0 +1,37 @@
+<%- include('../../partials/head', { title: tournament?.name || 'Tournoi' }) %>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+<%- include('../../partials/header') %>
+
+<main class="container mx-auto py-8 px-4 grow">
+    <a href="/tournaments" class="text-blue-600 hover:underline">← Retour</a>
+
+    <div class="bg-white rounded-lg shadow p-6 mt-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2"><%= tournament.name %></h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+            <div><span class="font-semibold">Jeu:</span> <%= tournament.game %></div>
+            <div><span class="font-semibold">Format:</span> <%= tournament.format %></div>
+            <div><span class="font-semibold">Statut:</span> <%= tournament.status %></div>
+            <div><span class="font-semibold">Max participants:</span> <%= tournament.maxParticipants %></div>
+            <div><span class="font-semibold">Prize pool:</span> <%= tournament.prizePool %></div>
+            <div><span class="font-semibold">Start:</span> <%= new Date(tournament.startDate).toLocaleString() %></div>
+            <% if (tournament.endDate) { %>
+                <div><span class="font-semibold">End:</span> <%= new Date(tournament.endDate).toLocaleString() %></div>
+            <% } %>
+        </div>
+
+        <div class="mt-6">
+            <a
+                    href="/tournaments/<%= tournament.id %>/registrations"
+                    class="inline-block bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
+            >
+                Voir les inscriptions
+            </a>
+        </div>
+    </div>
+</main>
+
+<%- include('../../partials/footer') %>
+</body>
+</html>

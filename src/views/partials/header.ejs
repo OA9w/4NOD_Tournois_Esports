@@ -1,0 +1,78 @@
+<header class="bg-gray-800 text-white">
+    <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+            <!-- LOGO -->
+            <a href="/" class="text-xl font-bold hover:text-blue-400 flex items-center gap-2">
+                <%- icon('Trophy', { size: 24 }) %>
+                E-sport Tournament Manager
+            </a>
+
+            <!-- NAV -->
+            <ul class="flex gap-6 items-center">
+                <li>
+                    <a href="/" class="hover:text-blue-400 flex items-center gap-1">
+                        <%- icon('Home', { size: 18 }) %>
+                        Accueil
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/tournaments" class="hover:text-blue-400 flex items-center gap-1">
+                        <%- icon('Trophy', { size: 18 }) %>
+                        Tournois
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/teams" class="hover:text-blue-400 flex items-center gap-1">
+                        <%- icon('Users', { size: 18 }) %>
+                        Équipes
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/api-docs" class="hover:text-blue-400 text-gray-400 flex items-center gap-1">
+                        <%- icon('FileText', { size: 18 }) %>
+                        API
+                    </a>
+                </li>
+
+                <% if (user && user.role === 'ADMIN') { %>
+                    <li>
+                        <a href="/admin" class="hover:text-blue-400 flex items-center gap-1">
+                            <%- icon('Shield', { size: 18 }) %>
+                            Admin
+                        </a>
+                    </li>
+                <% } %>
+
+                <!-- AUTH -->
+                <li class="border-l border-gray-600 pl-6 ml-2">
+                    <% if (user) { %>
+                        <div class="flex items-center gap-4">
+              <span class="text-gray-400 flex items-center gap-1">
+                <%- icon('User', { size: 18 }) %>
+                  <%= user.username %>
+              </span>
+                            <a
+                                    href="/auth/logout"
+                                    class="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm flex items-center gap-1"
+                            >
+                                <%- icon('LogOut', { size: 16 }) %>
+                                Déconnexion
+                            </a>
+                        </div>
+                    <% } else { %>
+                        <a
+                                href="/auth/login"
+                                class="bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded text-sm flex items-center gap-1"
+                        >
+                            <%- icon('LogIn', { size: 16 }) %>
+                            Connexion
+                        </a>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,9 @@
+﻿[
+  {
+    "id": 1,
+    "name": "Team Alpha",
+    "tag": "ALPHA",
+    "captainId": 3,
+    "members": [3, 4]
+  }
+]

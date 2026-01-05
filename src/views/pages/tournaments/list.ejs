@@ -1,0 +1,43 @@
+<%- include('../../partials/head', { title: 'Tournois' }) %>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+<%- include('../../partials/header') %>
+
+<main class="container mx-auto py-8 px-4 grow">
+    <div class="flex items-center justify-between mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Tournois</h1>
+        <a href="/api-docs" class="text-blue-600 hover:underline">Swagger</a>
+    </div>
+
+    <% if (!tournaments || tournaments.length === 0) { %>
+        <div class="bg-white rounded-lg shadow p-6 text-gray-600">
+            Aucun tournoi pour le moment.
+        </div>
+    <% } else { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <% tournaments.forEach(t => { %>
+                <a href="/tournaments/<%= t.id %>" class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h2 class="text-xl font-semibold text-gray-800"><%= t.name %></h2>
+                            <p class="text-gray-600 mt-1">
+                                Jeu: <span class="font-medium"><%= t.game %></span>
+                            </p>
+                            <p class="text-gray-600">
+                                Format: <span class="font-medium"><%= t.format %></span>
+                                • Statut: <span class="font-medium"><%= t.status %></span>
+                            </p>
+                        </div>
+                        <span class="text-sm bg-gray-100 text-gray-700 px-3 py-1 rounded-full">
+                #<%= t.id %>
+              </span>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } %>
+</main>
+
+<%- include('../../partials/footer') %>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<%- include('../../partials/head', { title: team?.name || 'Équipe' }) %>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+<%- include('../../partials/header') %>
+
+<main class="container mx-auto py-8 px-4 grow">
+    <a href="/teams" class="text-blue-600 hover:underline">← Retour</a>
+
+    <div class="bg-white rounded-lg shadow p-6 mt-4">
+        <h1 class="text-3xl font-bold text-gray-800 mb-2"><%= team.name %></h1>
+        <p class="text-gray-700"><span class="font-semibold">Tag:</span> <%= team.tag %></p>
+
+        <% if (team.captain) { %>
+            <p class="text-gray-700 mt-2">
+                <span class="font-semibold">Capitaine:</span> <%= team.captain.username %> (<%= team.captain.email %>)
+            </p>
+        <% } %>
+
+        <% if (team.members && team.members.length > 0) { %>
+            <div class="mt-4">
+                <h2 class="text-xl font-semibold text-gray-800 mb-2">Membres</h2>
+                <ul class="list-disc pl-6 text-gray-700">
+                    <% team.members.forEach(m => { %>
+                        <li><%= m.username %> - <%= m.email %></li>
+                    <% }) %>
+                </ul>
+            </div>
+        <% } %>
+    </div>
+</main>
+
+<%- include('../../partials/footer') %>
+</body>
+</html>

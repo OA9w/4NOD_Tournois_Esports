@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "Counter-Strike 2",
+    "genre": "FPS",
+    "releaseYear": 2023,
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "description": "Tactical FPS reference game"
+  },
+  {
+    "id": 2,
+    "name": "League of Legends",
+    "genre": "MOBA",
+    "releaseYear": 2009,
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "description": "Competitive team-based MOBA"
+  },
+  {
+    "id": 3,
+    "name": "Valorant",
+    "genre": "FPS",
+    "releaseYear": 2020,
+    "minPlayers": 2,
+    "maxPlayers": 10,
+    "description": "Tactical FPS with agents"
+  },
+  {
+    "id": 4,
+    "name": "Apex Legends",
+    "genre": "FPS",
+    "releaseYear": 2019,
+    "minPlayers": 3,
+    "maxPlayers": 60,
+    "description": "Battle royale with hero abilities"
+  }
+]

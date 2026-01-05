@@ -1,0 +1,22 @@
+<%- include('../partials/head', { title: title }) %>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <%- include('../partials/header') %>
+
+  <main class="container mx-auto py-8 px-4 grow flex items-center justify-center">
+    <div class="text-center">
+      <div class="flex justify-center mb-6 text-gray-400">
+        <%- icon('AlertCircle', { size: 80 }) %>
+      </div>
+      <h1 class="text-4xl font-bold text-gray-800 mb-4"><%= title %></h1>
+      <p class="text-xl text-gray-600 mb-8"><%= message %></p>
+      <a href="/" class="inline-flex items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 transition-colors">
+        <%- icon('Home', { size: 18 }) %>
+        Retour a l'accueil
+      </a>
+    </div>
+  </main>
+
+  <%- include('../partials/footer') %>
+</body>
+</html>
